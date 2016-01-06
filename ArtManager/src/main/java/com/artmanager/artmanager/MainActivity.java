@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.artmanager.artmanager.enums.ArtTechnic;
+import com.artmanager.artmanager.enums.EventType;
+import com.artmanager.artmanager.model.Events;
+import com.artmanager.artmanager.model.Painting;
 import com.artmanager.artmanager.model.Shop;
 
 
@@ -14,14 +18,30 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Shop saveShop = new Shop();
-        saveShop.setAddress("add");
-        saveShop.setCity("Sofia");
-        saveShop.setContactName("Didi");
-        saveShop.setDetails("det");
-        saveShop.setName("name");
-        saveShop.setTelephone("+359882545");
-        saveShop.saveInBackground();
+        for (int i = 0; i<5 ; i++) {
+            Shop saveShop = new Shop();
+            saveShop.setAddress("add");
+            saveShop.setCity("Sofia" + i);
+            saveShop.setContactName("Didi");
+            saveShop.setDetails("det");
+            saveShop.setName("name" + i);
+            saveShop.setTelephone("+359882545");
+            saveShop.saveEventually();
+
+            Painting  painting = new Painting();
+            painting.setHeight(20);
+            painting.setWidth(30);
+            painting.setType(ArtTechnic.GRAPHIC);
+            painting.setName("Zora"+ i);
+            painting.saveEventually();
+
+            Events event = new Events();
+            event.setEventType(EventType.CHECK_IN);
+            event.setRevenue(125);
+            event.setPainting(painting);
+            event.setShop(saveShop);
+            event.saveEventually();
+        }
     }
 
 

@@ -1,27 +1,25 @@
 package com.artmanager.artmanager.enums;
 
 public enum ArtTechnic {
-	OIL_PAINTING(1, "Oil Painting"),
-	GRAPHIC(2, "Graphic"),
-	WATER_PAINTING(3, "Water Painting");
-	
-	public int val;
+	OIL_PAINTING("Oil Painting"),
+	GRAPHIC("Graphic"),
+	WATER_PAINTING("Water Painting");
+
 	public String strVal;
 
-	private ArtTechnic(int val, String strVal) {
-		this.val = val;
+	private ArtTechnic(String strVal) {
 		this.strVal = strVal;
 	}
-	
-	public ArtTechnic valueOf(int val){
+
+	public static ArtTechnic getByStringValue(String val) {
 		switch (val) {
-		case 1:
-			return OIL_PAINTING;
-		case 2:
-			return GRAPHIC;
-		case 3:
-			return WATER_PAINTING;
+			case "Oil Painting":
+				return ArtTechnic.OIL_PAINTING;
+			case "Graphic":
+				return ArtTechnic.GRAPHIC;
+			case "Water Painting":
+				return ArtTechnic.WATER_PAINTING;
 		}
-		throw new RuntimeException("ArtTechnic: value not supportted " + val);
+		throw new RuntimeException("Sport Type value not supported " + val);
 	}
 }

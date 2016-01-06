@@ -44,6 +44,12 @@ public class Shop extends ParseObject {
         put("Details", det);
     }
 
+//    public InstrumentType getType() {
+//        return InstrumentType.parse(getString("type"));
+//    }
+//    public void setType(InstrumentType type) {
+//        put("type", type.toString());
+//    }
     public String getName() {
         return getString("Name");
     }

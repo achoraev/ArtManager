@@ -1,5 +1,6 @@
 package com.artmanager.artmanager.model;
 
+import com.artmanager.artmanager.enums.ArtTechnic;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -24,12 +25,12 @@ public class Painting extends ParseObject {
 		put("Name", name);
 	}
 
-	public String getType() {
-		return getString("Type");
+	public ArtTechnic getType() {
+		return ArtTechnic.getByStringValue(getString("Type"));
 	}
 
-	public void setType(String type) {
-		put("Type", type);
+	public void setType(ArtTechnic type) {
+		put("Type", type.strVal);
 	}
 
 	public int getWidth() {

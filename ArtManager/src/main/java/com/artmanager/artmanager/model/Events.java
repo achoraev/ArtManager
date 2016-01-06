@@ -1,5 +1,6 @@
 package com.artmanager.artmanager.model;
 
+import com.artmanager.artmanager.enums.EventType;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -11,12 +12,12 @@ import com.parse.ParseQuery;
 public class Events extends ParseObject {
     public Events(){}
 
-    public String getEventType() {
-        return getString("EventType");
+    public EventType getEventType() {
+        return EventType.getByStringValue(getString("EventType"));
     }
 
-    public void setEventType(String eventType) {
-        put("EventType", eventType);
+    public void setEventType(EventType eventType) {
+        put("EventType", eventType.strVal);
     }
 
     public int getRevenue() {
@@ -27,7 +28,39 @@ public class Events extends ParseObject {
         put("Revenue", revenue);
     }
 
-    public static ParseQuery<Events> getQuery() {
-        return ParseQuery.getQuery(Events.class);
+//    public static ParseQuery<Events> getQuery() {
+//        return ParseQuery.getQuery(Events.class);
+//    }
+
+
+    public String getShopId() {
+        return getString("ShopId");
     }
+
+
+    public void setShopId(String shopId) {
+        put("ShopId", shopId);
+    }
+
+    public void setShop(Shop shop) {
+        put("ShopId", shop.get("objectId"));
+    }
+
+    public String getPaintingId() {
+        return getString("PaintingId");
+    }
+
+    public void setPaintingId(String paintingId) {
+        put("PaintingId", paintingId);
+    }
+    public void setPainting(Painting painting) {
+        put("PaintingId", painting.get("objectId"));
+    }
+    public static ParseQuery<Events> getQueryDescendingOrder() {
+        return ParseQuery.getQuery(Events.class).orderByDescending("createdAt");
+    }
+
+//    public static ParseQuery<Events> getQueryByShop() {
+//        return ParseQuery.getQuery(Events.class).whereEqualTo("ShopId",);
+//    }
 }
