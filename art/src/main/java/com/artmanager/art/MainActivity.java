@@ -1,9 +1,15 @@
 package com.artmanager.art;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.artmanager.art.enums.ArtTechnic;
+import com.artmanager.art.enums.EventType;
+import com.artmanager.art.model.Events;
+import com.artmanager.art.model.Painting;
+import com.artmanager.art.model.Shop;
+import com.parse.ParseException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,6 +17,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        for (int i = 0; i < 5; i++) {
+            Shop saveShop = new Shop();
+            saveShop.setAddress("add");
+            saveShop.setCity("Sofia" + i);
+            saveShop.setContactName("Didi");
+            saveShop.setDetails("det");
+            saveShop.setName("name" + i);
+            saveShop.setTelephone("+359882545");
+            saveShop.saveEventually();
+
+            Painting painting = new Painting();
+            painting.setHeight(20);
+            painting.setWidth(30);
+            painting.setType(ArtTechnic.GRAPHIC);
+            painting.setName("Zora" + i);
+            try {
+                painting.save();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Events event = new Events();
+            event.setEventType(EventType.CHECK_IN);
+            event.setRevenue(125);
+            event.setPainting(painting);
+            event.setShop(saveShop);
+            event.saveEventually();
+        }
     }
 
     @Override
